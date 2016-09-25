@@ -15,4 +15,4 @@ const App = React.createClass({
   }
 });
 
-AppRegistry.registerComponent('rn_observable_boilerplater', () => App);
+AppRegistry.registerComponent('react_native_redux_observable_boilerplate', () => App);
