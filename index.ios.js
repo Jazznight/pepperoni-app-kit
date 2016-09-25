@@ -1,12 +1,11 @@
 import {Provider} from 'react-redux';
-import store from './src/redux/store';
+import store from './src/store';
 import AppViewContainer from './src/modules/AppViewContainer';
 
 import React from 'react';
 import {AppRegistry} from 'react-native';
 
-const PepperoniAppTemplate = React.createClass({
-
+const App = React.createClass({
   render() {
     return (
       <Provider store={store}>
@@ -16,4 +15,4 @@ const PepperoniAppTemplate = React.createClass({
   }
 });
 
-AppRegistry.registerComponent('PepperoniAppTemplate', () => PepperoniAppTemplate);
+AppRegistry.registerComponent('rn_observable_boilerplater', () => App);

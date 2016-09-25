@@ -1,11 +1,10 @@
 import createLogger from 'redux-logger';
 
-// log actions in development mode
 export default createLogger({
   collapsed: true,
 
   // only log in development mode
-  predicate: () => __DEV__,
+  predicate: () => (process.env.NODE_ENV != 'production'),
 
   // transform immutable state to plain objects
   stateTransformer: state => state.toJS(),

@@ -1,6 +1,22 @@
-import {Map} from 'immutable';
-import {loop, Effects} from 'redux-loop';
-import {generateRandomNumber} from '../../services/randomNumberService';
+import { Map } from 'immutable';
+import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/observable/interval';
+import 'rxjs/add/operator/debounce';
+import 'rxjs/add/operator/do';
+
+import makeActionCreator from '../../utils/ActionHelpers';
+
+// Actions
+const INCREMENT = 'CounterState/INCREMENT';
+const RESET = 'CounterState/RESET';
+const RANDOM = 'CounterState/RANDOM';
+const RANDOM_DONE = 'CounterState/RANDOM_DONE';
+
+export const increment   = makeActionCreator(INCREMENT);
+export const reset       = makeActionCreator(RESET);
+export const random      = makeActionCreator(RANDOM);
+export const randomDone  = makeActionCreator(RANDOM_DONE, 'number');
+
 
 // Initial state
 const initialState = Map({
@@ -8,55 +24,35 @@ const initialState = Map({
   loading: false
 });
 
-// Actions
-const INCREMENT = 'CounterState/INCREMENT';
-const RESET = 'CounterState/RESET';
-const RANDOM_REQUEST = 'CounterState/RANDOM_REQUEST';
-const RANDOM_RESPONSE = 'CounterState/RANDOM_RESPONSE';
+const randomCountEpic = action$ =>
+  action$.ofType(RANDOM)
+    .debounce(ev => Observable.interval(1000))
+    .do( (/*action*/) => 
+      Observable.of( randomDone(Math.floor(Math.random() * 100)) )
+    )
 
-// Action creators
-export function increment() {
-  return {type: INCREMENT};
-}
-
-export function reset() {
-  return {type: RESET};
-}
-
-export function random() {
-  return {
-    type: RANDOM_REQUEST
-  };
-}
-
-export async function requestRandomNumber() {
-  return {
-    type: RANDOM_RESPONSE,
-    payload: await generateRandomNumber()
-  };
-}
+export const counterEpic = [
+  randomCountEpic,
+];
 
 // Reducer
-export default function CounterStateReducer(state = initialState, action = {}) {
+export const counterReducer = (_ = initialState, action = {}) => {
   switch (action.type) {
     case INCREMENT:
-      return state.update('value', value => value + 1);
+      return _.update('value', value => value + 1);
 
     case RESET:
       return initialState;
 
-    case RANDOM_REQUEST:
-      return loop(
-        state.set('loading', true),
-        Effects.promise(requestRandomNumber)
-      );
+    case RANDOM:
+      return _.set('loading', true);
 
-    case RANDOM_RESPONSE:
-      return state
+    case RANDOM_DONE:
+      return _
         .set('loading', false)
-        .set('value', action.payload);
+        .set('value', action.number);
 
     default:
-      return state;
+      return _;
   }
 }

@@ -1,27 +1,28 @@
-import React, {PropTypes} from 'react';
+import React, {PropTypes, component} from 'react';
 import {View, StyleSheet, ActivityIndicator} from 'react-native';
 import NavigationViewContainer from './navigation/NavigationViewContainer';
 import * as auth0 from '../services/auth0';
-import * as snapshotUtil from '../utils/snapshot';
-import * as SessionStateActions from '../modules/session/SessionState';
-import store from '../redux/store';
+import * as snapshotUtil from '../utils/Snapshot';
 import DeveloperMenu from '../components/DeveloperMenu';
+import store from '../store';
 
 const AppView = React.createClass({
   propTypes: {
     isReady: PropTypes.bool.isRequired,
     isLoggedIn: PropTypes.bool.isRequired,
-    dispatch: PropTypes.func.isRequired
+    resetSessionStateFromSnapshot: PropTypes.func.isRequired,
+    initializeSessionState: PropTypes.func.isRequired
   },
+
   componentDidMount() {
     snapshotUtil.resetSnapshot()
       .then(snapshot => {
         const {dispatch} = this.props;
 
         if (snapshot) {
-          dispatch(SessionStateActions.resetSessionStateFromSnapshot(snapshot));
+          this.props.resetSessionStateFromSnapshot(snapshot);
         } else {
-          dispatch(SessionStateActions.initializeSessionState());
+          this.props.initializeSessionState();
         }
 
         store.subscribe(() => {
