@@ -30,22 +30,22 @@ export function showLogin() {
     closable: true
   };
 
-  if (Platform.OS === 'ios') {
-    lock.customizeTheme({
-      A0ThemePrimaryButtonNormalColor: '#39babd',
-      A0ThemePrimaryButtonHighlightedColor: '#08AFB3',
-      A0ThemeSecondaryButtonTextColor: '#ffffff',
-      A0ThemeTextFieldTextColor: '#ffffff',
-      A0ThemeTextFieldPlaceholderTextColor: '#ffffff',
-      A0ThemeTextFieldIconColor: '#ffffff',
-      A0ThemeTitleTextColor: '#ffffff',
-      A0ThemeDescriptionTextColor: '#ffffff',
-      A0ThemeSeparatorTextColor: '#ffffff',
-      A0ThemeScreenBackgroundColor: '#39babd',
-      A0ThemeIconImageName: 'pepperoni',
-      A0ThemeCredentialBoxBorderColor: '' //transparent
-    });
-  }
+//   if (Platform.OS === 'ios') {
+//     lock.customizeTheme({
+//       A0ThemePrimaryButtonNormalColor: '#39babd',
+//       A0ThemePrimaryButtonHighlightedColor: '#08AFB3',
+//       A0ThemeSecondaryButtonTextColor: '#ffffff',
+//       A0ThemeTextFieldTextColor: '#ffffff',
+//       A0ThemeTextFieldPlaceholderTextColor: '#ffffff',
+//       A0ThemeTextFieldIconColor: '#ffffff',
+//       A0ThemeTitleTextColor: '#ffffff',
+//       A0ThemeDescriptionTextColor: '#ffffff',
+//       A0ThemeSeparatorTextColor: '#ffffff',
+//       A0ThemeScreenBackgroundColor: '#39babd',
+//       A0ThemeIconImageName: 'pepperoni',
+//       A0ThemeCredentialBoxBorderColor: '' //transparent
+//     });
+//   }
 
   lock.show(options, (err, profile, token) => {
     if (err) {

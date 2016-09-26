@@ -1,4 +1,4 @@
-rootProject.name = 'PepperoniAppTemplate'
+rootProject.name = 'react_native_redux_observable_boilerplate'
 
 include ':app'
 include ':react-native-lock'

@@ -28,10 +28,10 @@ const CounterView = React.createClass({
     this.props.random();
   },
   bored() {
-    this.props.dispatch(NavigationState.pushRoute({
+    this.props.pushRoute({
       key: 'Color',
       title: 'Color Screen'
-    }));
+    });
   },
 
   renderUserInfo() {

@@ -5,6 +5,7 @@ import {
   reset,
   random,
 } from './CounterState';
+import { pushRoute } from '../../modules/navigation/NavigationState';
 
 export default connect(
   state => ({
@@ -17,5 +18,6 @@ export default connect(
     increment,
     reset,
     random,
+    pushRoute,
   }
 )(CounterView);

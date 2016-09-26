@@ -20,10 +20,11 @@ const initialState = Map({
 export const authStateReducer = (_ = initialState, action = {}) => {
   switch (action.type) {
     case LOGIN_DONE:
+      console.log('authReducer.......', action)
       return _
         .set('isLoggedIn', true)
-        .set('currentUser', action.payload.profile)
-        .set('authenticationToken', action.payload.token);
+        .set('currentUser', action.profile)
+        .set('authenticationToken', action.token);
     case LOGIN_FAIL:
       return initialState;
     default:

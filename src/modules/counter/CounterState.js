@@ -2,7 +2,7 @@ import { Map } from 'immutable';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/interval';
 import 'rxjs/add/operator/debounce';
-import 'rxjs/add/operator/do';
+import 'rxjs/add/operator/map';
 
 import makeActionCreator from '../../utils/ActionHelpers';
 
@@ -27,8 +27,8 @@ const initialState = Map({
 const randomCountEpic = action$ =>
   action$.ofType(RANDOM)
     .debounce(ev => Observable.interval(1000))
-    .do( (/*action*/) => 
-      Observable.of( randomDone(Math.floor(Math.random() * 100)) )
+    .map( (/*action*/) =>
+      randomDone(Math.floor(Math.random() * 100))
     )
 
 export const counterEpic = [

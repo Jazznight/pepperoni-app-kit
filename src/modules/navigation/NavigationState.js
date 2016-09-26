@@ -26,7 +26,8 @@ const initialState = fromJS({
   // Scenes for the `HomeTab` tab.
   HomeTab: {
     index: 0,
-    routes: [{key: 'Home', title: 'Home screen'}]
+    routes: [{key: 'Counter', title: 'Counter screen'}]
+    //routes: [{key: 'Home', title: 'Home screen'}]
   },
   // Scenes for the `ProfileTab` tab.
   ProfileTab: {
@@ -61,6 +62,7 @@ export const routeReducer = (_ = initialState, action) => {
       case POP_ROUTE: {
         // Pops a route from the scenes stack.
         const tabs = _.get('tabs');
+        const tabKey = tabs.getIn(['routes', tabs.get('index')]).get('key');
         const scenes = _.get(tabKey).toJS();
         const nextScenes = NavigationStateUtils.pop(scenes);
         if (scenes !== nextScenes) {
