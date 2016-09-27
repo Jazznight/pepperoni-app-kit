@@ -1,6 +1,6 @@
 import {AsyncStorage} from 'react-native';
-import {fromJS} from 'immutable';
-const STATE_STORAGE_KEY = 'PepperoniAppTemplateAppState:Latest';
+import {fromJS, Map} from 'immutable';
+const STATE_STORAGE_KEY = 'ReactiveObservableApp:Latest';
 
 export async function resetSnapshot() {
   const state = await rehydrate();

@@ -5,7 +5,7 @@ import makeActionCreator from '../utils/ActionHelpers';
 export const RESET_STATE = 'SessionState/RESET';
 export const INITIALIZE_STATE = 'SessionState/INITIALIZE';
 
-export const resetSessionStateFromSnapshot = makeActionCreator(RESET_STATE);
+export const resetSessionStateFromSnapshot = makeActionCreator(RESET_STATE,'payload');
 export const initializeSessionState = makeActionCreator(INITIALIZE_STATE);
 
 

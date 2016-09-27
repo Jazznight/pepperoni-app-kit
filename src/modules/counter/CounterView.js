@@ -1,4 +1,3 @@
-import * as NavigationState from '../../modules/navigation/NavigationState';
 import React, {PropTypes} from 'react';
 import {
   StyleSheet,
@@ -11,8 +10,6 @@ import {
 const CounterView = React.createClass({
   propTypes: {
     counter: PropTypes.number.isRequired,
-    userName: PropTypes.string,
-    userProfilePhoto: PropTypes.string,
     loading: PropTypes.bool.isRequired,
     increment: PropTypes.func.isRequired,
     reset: PropTypes.func.isRequired,
@@ -33,28 +30,6 @@ const CounterView = React.createClass({
       title: 'Color Screen'
     });
   },
-
-  renderUserInfo() {
-    if (!this.props.userName) {
-      return null;
-    }
-
-    return (
-      <View style={styles.userContainer}>
-        <Image
-          style={styles.userProfilePhoto}
-          source={{
-            uri: this.props.userProfilePhoto,
-            width: 80,
-            height: 80
-          }}
-        />
-        <Text style={styles.linkButton}>
-          Welcome, {this.props.userName}!
-        </Text>
-      </View>
-    );
-  },
   render() {
     const loadingStyle = this.props.loading
       ? {backgroundColor: '#eee'}
@@ -62,8 +37,6 @@ const CounterView = React.createClass({
 
     return (
       <View style={styles.container}>
-
-        {this.renderUserInfo()}
 
         <TouchableOpacity
           onPress={this.increment}
@@ -110,14 +83,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: 'white'
   },
-  userContainer: {
-    justifyContent: 'center',
-    alignItems: 'center'
-  },
-  userProfilePhoto: {
-    ...circle,
-    alignSelf: 'center'
-  },
   counterButton: {
     ...circle,
     backgroundColor: 'green',
@@ -129,12 +94,6 @@ const styles = StyleSheet.create({
     color: 'white',
     fontSize: 20,
     textAlign: 'center'
-  },
-  welcome: {
-    textAlign: 'center',
-    color: 'black',
-    marginBottom: 5,
-    padding: 5
   },
   linkButton: {
     textAlign: 'center',
